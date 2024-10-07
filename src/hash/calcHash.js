@@ -1,12 +1,21 @@
-import crypto from 'crypto';
+import { createHash } from 'crypto';
+import { createReadStream, read } from 'fs';
+import { pipeline } from 'stream';
 
 const calculateHash = async () => {
     // Write your code here 
 
-    let hex_crypt = crypto.createHash('sha256').update('salom', 'utf-8').digest('hex');
-    console.log(hex_crypt);
+    const hash = createHash('sha256');
+    const input = createReadStream('./files/fileToCalculateHashFor.txt');
 
-    // I will do streams api later
+    pipeline(input, hash, (err) => {
+        if (err) {
+            console.error(err);
+        } else {
+            console.log(hash.read().toString('hex'));
+        }
+    })
+
 
 };
 
