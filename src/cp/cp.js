@@ -7,10 +7,6 @@ const spawnChildProcess = async (args) => {
     process.stdin.pipe(child_process.stdin);
     child_process.stdout.pipe(process.stdout);
 
-    // child_process.stdout.on('data', (data) => {
-    //     console.log(`stdout: ${data}`);
-    // });
-
     child_process.stderr.on('data', (data) => {
         console.log(`stderr: , ${data}`);
     });
